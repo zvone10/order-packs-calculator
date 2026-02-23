@@ -4,12 +4,14 @@ import (
 	"sort"
 )
 
+// Calculator defines the interface for calculating optimal packaging
 type Calculator interface {
 	CalculateOptimalPack(numberOfItems int, packageSizes []int) (map[int]int, error)
 }
 
 type calculator struct{}
 
+// NewCalculator creates a new instance of the calculator
 func NewCalculator() Calculator {
 	return &calculator{}
 }
