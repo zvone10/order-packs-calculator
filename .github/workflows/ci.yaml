@@ -98,8 +98,6 @@ jobs:
     needs: [lint, test, benchmark]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/beta')
-    # Notice there is no working-directory here. 
-    # Semantic-release generally needs to run at the repo root to analyze Git history and tags properly.
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
