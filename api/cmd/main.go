@@ -20,7 +20,7 @@ func main() {
 	})
 
 	v1 := r.Group("/api/v1")
-	v1.POST("/pack/calculate", h.Calculate)
+	v1.POST("/pack-calculation", h.Calculate)
 
 	r.Run(":8080")
 }
