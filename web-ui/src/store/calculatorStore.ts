@@ -103,7 +103,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => ({
 
     set({ loading: true, error: null })
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/pack-calculation`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/pack-calculation`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
