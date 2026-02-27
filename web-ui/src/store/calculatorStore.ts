@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { CalculationResponse } from '../types'
+import { joinUrl } from '../utils/urlUtils'
 
 const STORAGE_KEY = 'packSizes'
 
@@ -103,7 +104,8 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => ({
 
     set({ loading: true, error: null })
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/pack-calculation`, {
+      const apiUrl = joinUrl(import.meta.env.VITE_API_URL, 'api/v1/pack-calculation')
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
