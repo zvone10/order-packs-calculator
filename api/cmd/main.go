@@ -44,6 +44,14 @@ func main() {
 	})
 
 	v1 := r.Group("/api/v1")
+	v1.Use(cors.New(cors.Config{
+		AllowOrigins:  []string{"*"},
+		AllowMethods:  []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:  []string{"Content-Type", "Authorization"},
+		ExposeHeaders: []string{"Content-Length"},
+		MaxAge:        12 * time.Hour,
+	}))
+	v1.OPTIONS("/pack-calculation")
 	v1.POST("/pack-calculation", h.Calculate)
 
 	addr := fmt.Sprintf(":%d", cfg.Port)
