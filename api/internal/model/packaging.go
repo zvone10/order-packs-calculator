@@ -10,6 +10,9 @@ type PackResult struct {
 	BoxCount int `json:"boxCount"`
 }
 
+/**
+* PackResponse represents the response structure for the packing calculation.
+ */
 type PackResponse struct {
 	TotalItems int          `json:"totalItems"`
 	Results    []PackResult `json:"results"`

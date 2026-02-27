@@ -112,7 +112,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => ({
       })
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+        throw new Error(`HTTP error status: ${response.status}`)
       }
 
       const data: CalculationResponse = await response.json()
