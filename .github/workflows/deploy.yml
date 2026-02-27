@@ -38,7 +38,7 @@ jobs:
           heroku git:remote -a $HEROKU_APP_NAME
           
           # Deploy using git subtree
-          git push heroku `git subtree split --prefix api HEAD`:main --force
+          git push heroku `git subtree split --prefix api HEAD`:master --force
 
       - name: Deploy Frontend to Heroku
         env:
@@ -54,7 +54,7 @@ jobs:
           heroku config:set VITE_API_URL=$VITE_API_URL -a $HEROKU_APP_NAME
           
           # Deploy using git subtree
-          git push heroku-ui `git subtree split --prefix web-ui HEAD`:main --force
+          git push heroku-ui `git subtree split --prefix web-ui HEAD`:master --force
 
       - name: Verify Deployments
         env:
