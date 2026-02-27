@@ -32,7 +32,7 @@ export function PackSizesInput() {
         ))}
       </div>
       <div className="button-group">
-        <button onClick={addPackSize} className="btn-primary">
+        <button onClick={() => addPackSize()} className="btn-primary">
           Add Pack Size
         </button>
         {packSizes.length > 0 && (

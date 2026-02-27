@@ -11,7 +11,7 @@ interface CalculatorStore {
   error: string | null
 
   // Pack sizes actions
-  addPackSize: (size: number) => void
+  addPackSize: () => void
   removePackSize: (index: number) => void
   updatePackSize: (index: number, value: number) => void
   loadPackSizes: () => void
