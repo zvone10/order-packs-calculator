@@ -3,6 +3,7 @@ import { CalculationResponse } from '../types'
 
 const STORAGE_KEY = 'packSizes'
 
+/** Store of app state */
 interface CalculatorStore {
   packSizes: number[]
   numberOfItems: number
