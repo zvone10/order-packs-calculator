@@ -1,0 +1,65 @@
+# Go specific
+api/bin/
+api/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.so.*
+*.dylib
+*.test
+*.out
+*.prof
+.env
+.env.local
+
+# Dependency directories
+api/vendor/
+
+# Local development
+api/.air.toml
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Node.js / React specific
+web-ui/node_modules/*
+web-ui/dist/
+web-ui/build/
+web-ui/.env
+web-ui/.env.local
+web-ui/.env.*.local
+web-ui/npm-debug.log*
+web-ui/yarn-debug.log*
+web-ui/yarn-error.log*
+web-ui/pnpm-debug.log*
+
+# Build outputs
+web-ui/.vite/
+web-ui/dist/
+web-ui/*.local
+
+# Testing
+web-ui/coverage/
+
+# Logs
+logs
+*.log
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# IDE
+*.sublime-workspace
+*.sublime-project
+
+# Root level build artifacts
+dist/
+build/
+*.tmp

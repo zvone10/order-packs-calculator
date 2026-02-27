@@ -7,11 +7,13 @@
     "dev": "vite",
     "build": "tsc -b && VITE_API_URL=$API_URL vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx"
+    "lint": "eslint . --ext ts,tsx",
+    "start": "serve -s dist"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "serve": "^14.2.5",
     "zustand": "^4.4.0"
   },
   "devDependencies": {
