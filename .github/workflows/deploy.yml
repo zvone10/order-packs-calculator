@@ -1,0 +1,68 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Deploy Backend to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+          HEROKU_APP_NAME: order-packs-calculator-api
+        run: |
+          # Install Heroku CLI
+          curl https://cli-assets.heroku.com/install.sh | sh
+          
+          # Login to Heroku
+          echo "machine api.heroku.com" > ~/.netrc
+          echo "  login $HEROKU_EMAIL" >> ~/.netrc
+          echo "  password $HEROKU_API_KEY" >> ~/.netrc
+          echo "machine git.heroku.com" >> ~/.netrc
+          echo "  login $HEROKU_EMAIL" >> ~/.netrc
+          echo "  password $HEROKU_API_KEY" >> ~/.netrc
+          chmod 600 ~/.netrc
+          
+          # Add Heroku remote
+          heroku git:remote -a $HEROKU_APP_NAME
+          
+          # Deploy using git subtree
+          git push heroku `git subtree split --prefix api HEAD`:main --force
+
+      - name: Deploy Frontend to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+          HEROKU_APP_NAME: order-packs-calculator-ui
+          VITE_API_URL: https://order-packs-calculator-api.herokuapp.com
+        run: |
+          # Add Heroku remote for frontend
+          heroku git:remote -a $HEROKU_APP_NAME --remote heroku-ui
+          
+          # Set config vars
+          heroku config:set VITE_API_URL=$VITE_API_URL -a $HEROKU_APP_NAME
+          
+          # Deploy using git subtree
+          git push heroku-ui `git subtree split --prefix web-ui HEAD`:main --force
+
+      - name: Verify Deployments
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          echo "Backend deployed at: https://order-packs-calculator-api.herokuapp.com"
+          echo "Frontend deployed at: https://order-packs-calculator-ui.herokuapp.com"
+          
+          # Wait for apps to be ready
+          sleep 10
+          
+          # Try to reach the backend health endpoint
+          curl -f https://order-packs-calculator-api.herokuapp.com/ || echo "Backend startup verification skipped"

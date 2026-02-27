@@ -1,0 +1,19 @@
+*.local
+docs/.vuepress/dist
+node_modules
+dist
+build
+.env
+.env.local
+.env.production.local
+
+# Generated files
+.cache
+.idea
+
+# Testing
+coverage
+
+# IDE
+.vscode
+.DS_Store
