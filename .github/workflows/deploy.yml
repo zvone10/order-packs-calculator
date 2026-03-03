@@ -50,7 +50,7 @@ jobs:
           heroku git:remote -a $HEROKU_APP_NAME --remote heroku-ui
           
           # Set config vars
-          heroku config:set VITE_API_URL=$VITE_API_URL -a $HEROKU_APP_NAME
+          # heroku config:set VITE_API_URL=$VITE_API_URL -a $HEROKU_APP_NAME
           
           # Deploy using git subtree
           git push heroku-ui $(git subtree split --prefix web-ui HEAD):refs/heads/main --force
