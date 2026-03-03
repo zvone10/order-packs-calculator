@@ -178,6 +178,15 @@ docker run -p 3000:5000 -e VITE_API_URL=http://localhost:8080 order-packs-calcul
 
 ## Testing
 
+Run unit tests in api folder with 
+```
+go test ./...
+```
+Run benchmark tests
+```
+go test -bench=. -benchmem ./internal/calculator
+```
+
 ### Backend Tests
 ```bash
 cd api

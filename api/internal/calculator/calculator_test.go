@@ -77,6 +77,15 @@ func TestCalculateOptimalPack(t *testing.T) {
 			},
 			expectError: false,
 		},
+		{
+			name:          "Large target which is multiple",
+			numberOfItems: 13,
+			boxCapacity:   []int{12, 500, 1200, 2011},
+			expectedResult: map[int]int{
+				12: 2,
+			},
+			expectError: false,
+		},
 	}
 
 	for _, tt := range tests {
@@ -97,5 +106,16 @@ func TestCalculateOptimalPack(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func BenchmarkCalculateOptimalPack(b *testing.B) {
+	calc := NewKnapsackCalculator()
+	numberOfItems := 5000000
+	boxCapacity := []int{17, 65, 88, 111}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		calc.CalculateOptimalPack(numberOfItems, boxCapacity)
 	}
 }
