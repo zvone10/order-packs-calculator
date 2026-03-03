@@ -24,7 +24,7 @@ func main() {
 		log.Fatalf("Failed to process environment variables: %v", err)
 	}
 
-	calculator := calculator.NewGreedyCalculator()
+	calculator := calculator.NewKnapsackCalculator()
 	svc := service.NewPackingService(calculator)
 	h := handler.NewPackingHandler(svc)
 

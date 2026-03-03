@@ -51,6 +51,7 @@ func (c *KnapsackCalculator) CalculateOptimalPack(numberOfItems int, packageSize
 			break
 		}
 	}
+
 	optimal := make(map[int]int)
 	for minimalNumberOfPackages > 0 {
 		p := parent[minimalNumberOfPackages]
