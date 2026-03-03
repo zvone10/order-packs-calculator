@@ -45,7 +45,6 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
           HEROKU_APP_NAME: order-packs-calculator-ui
-          VITE_API_URL: https://order-packs-calculator-api.herokuapp.com
         run: |
           # Add Heroku remote for frontend
           heroku git:remote -a $HEROKU_APP_NAME --remote heroku-ui
