@@ -16,10 +16,6 @@ func (c *KnapsackCalculator) CalculateOptimalPack(numberOfItems int, packageSize
 	if HasSameItems(packageSizes) {
 		return nil, ErrDuplicatePackageSizes
 	}
-
-	// This is a placeholder for the actual knapsack algorithm implementation.
-	// The greedy algorithm is currently used in the GreedyCalculator.
-	// You can implement the knapsack algorithm here if needed.
 	sort.Ints(packageSizes)
 	minSize, maxSize := packageSizes[0], packageSizes[len(packageSizes)-1]
 
@@ -32,6 +28,7 @@ func (c *KnapsackCalculator) CalculateOptimalPack(numberOfItems int, packageSize
 		parent[s] = s
 	}
 
+	//knapsack algorithm
 	for i := minSize; i <= numberOfItems+maxSize; i++ {
 		for _, s := range packageSizes {
 			if v, ok := memoization[i-s]; ok && v != 0 && i >= s {
