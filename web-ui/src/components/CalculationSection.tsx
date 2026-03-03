@@ -14,8 +14,8 @@ export function CalculationSection() {
       <div className="input-group">
         <input
           type="number"
-          value={numberOfItems}
-          onChange={(e) => setNumberOfItems(Number(e.target.value))}
+          value={numberOfItems === 0 ? '' : numberOfItems}
+          onChange={(e) => setNumberOfItems(e.target.value === '' ? 0 : Number(e.target.value))}
           placeholder="Number of items"
           min="1"
           disabled={loading}

@@ -27,6 +27,10 @@ interface CalculatorStore {
   calculate: () => Promise<void>
 }
 
+/**
+ * Zustand store for managing pack sizes, number of items, calculation results, loading state, and errors.
+ * Provides actions to manipulate pack sizes and perform the calculation by calling the backend API.
+ */
 export const useCalculatorStore = create<CalculatorStore>((set, get) => ({
   packSizes: [],
   numberOfItems: 0,
