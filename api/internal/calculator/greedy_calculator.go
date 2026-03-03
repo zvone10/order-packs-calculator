@@ -1,0 +1,34 @@
+package calculator
+
+import "sort"
+
+type GreedyCalculator struct{}
+
+// NewCalculator creates a new instance of the calculator
+func NewGreedyCalculator() Calculator {
+	return &GreedyCalculator{}
+}
+
+func (c *GreedyCalculator) CalculateOptimalPack(numberOfItems int, packageSizes []int) (map[int]int, error) {
+	remainingItems := numberOfItems
+
+	// sort package sizes in descending order to maximize the use of larger packages
+	sort.Sort(sort.Reverse(sort.IntSlice(packageSizes)))
+
+	result := make(map[int]int)
+	for i, capacity := range packageSizes {
+
+		boxes := remainingItems / capacity
+		if boxes > 0 {
+			result[capacity] = boxes
+			remainingItems -= boxes * capacity
+		}
+
+		if boxes == 0 && i == len(packageSizes)-1 && remainingItems > 0 {
+			// if we are at the smallest package and still have remaining items, we need one more box
+			result[capacity] = 1
+			remainingItems = 0
+		}
+	}
+	return result, nil
+}
