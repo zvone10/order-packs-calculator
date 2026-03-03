@@ -4,6 +4,9 @@ import { PackSizesInput } from './components/PackSizesInput'
 import { CalculationSection } from './components/CalculationSection'
 import { ResultsTable } from './components/ResultsTable'
 
+/**
+ * Entry point of the application. Loads pack sizes from localStorage on mount and renders the main components.
+ */
 function App() {
   const loadPackSizes = useCalculatorStore((state) => state.loadPackSizes)
 
