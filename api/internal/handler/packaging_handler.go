@@ -3,6 +3,7 @@ package handler
 
 import (
 	"net/http"
+	"order-pack-calculator-api/internal/calculator"
 	"order-pack-calculator-api/internal/model"
 	"order-pack-calculator-api/internal/service"
 
@@ -25,6 +26,16 @@ func (h *PackingHandler) Calculate(c *gin.Context) {
 		return
 	}
 
-	result := h.svc.Calculate(req)
+	// Validate that BoxCapacity doesn't contain duplicates
+	if calculator.HasSameItems(req.BoxCapacity) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "boxCapacity contains duplicate values"})
+		return
+	}
+
+	result, err := h.svc.Calculate(req)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
 	c.JSON(http.StatusOK, result)
 }

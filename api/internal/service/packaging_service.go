@@ -2,12 +2,13 @@
 package service
 
 import (
+	"fmt"
 	"order-pack-calculator-api/internal/calculator"
 	"order-pack-calculator-api/internal/model"
 )
 
 type PackingService interface {
-	Calculate(req model.PackRequest) model.PackResponse
+	Calculate(req model.PackRequest) (model.PackResponse, error)
 }
 
 type packingService struct {
@@ -20,7 +21,7 @@ func NewPackingService(calculator calculator.Calculator) PackingService {
 	}
 }
 
-func (s *packingService) Calculate(req model.PackRequest) model.PackResponse {
+func (s *packingService) Calculate(req model.PackRequest) (model.PackResponse, error) {
 	results := make([]model.PackResult, 0, len(req.BoxCapacity))
 
 	optimalPack, err := s.packagingCalculator.CalculateOptimalPack(req.NumberOfItems, req.BoxCapacity)
@@ -28,7 +29,7 @@ func (s *packingService) Calculate(req model.PackRequest) model.PackResponse {
 		return model.PackResponse{
 			TotalItems: req.NumberOfItems,
 			Results:    results,
-		}
+		}, fmt.Errorf("error calculating optimal pack: %v", err)
 	}
 
 	for capcity, numberOfBoxes := range optimalPack {
@@ -41,5 +42,5 @@ func (s *packingService) Calculate(req model.PackRequest) model.PackResponse {
 	return model.PackResponse{
 		TotalItems: req.NumberOfItems,
 		Results:    results,
-	}
+	}, nil
 }

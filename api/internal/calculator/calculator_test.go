@@ -66,6 +66,17 @@ func TestCalculateOptimalPack(t *testing.T) {
 			},
 			expectError: false,
 		},
+		{
+			name:          "Large target which is multiple",
+			numberOfItems: 520000,
+			boxCapacity:   []int{5, 26, 53},
+			expectedResult: map[int]int{
+				5:  4,
+				26: 6,
+				53: 9808,
+			},
+			expectError: false,
+		},
 	}
 
 	for _, tt := range tests {
