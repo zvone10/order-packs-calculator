@@ -17,7 +17,7 @@ export function PackSizesInput() {
           <div key={index} className="pack-size-item">
             <input
               type="number"
-              value={size}
+              value={size === 0 ? '' : size}
               onChange={(e) => updatePackSize(index, Number(e.target.value))}
               placeholder="Enter pack size"
               min="1"
